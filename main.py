@@ -1,7 +1,14 @@
 from database import (
-    add_transaction, show_transactions, get_total_income, 
-    get_total_expenses, get_balance, plot_expenses_by_category, 
-    export_to_csv, export_to_pdf, filter_transactions_by_month
+    add_transaction, 
+    show_transactions, 
+    get_total_income, 
+    get_total_expenses, 
+    get_balance, 
+    # NEU: importiere die neue Funktion
+    plot_incomes_and_expenses_by_category,
+    export_to_csv, 
+    export_to_pdf, 
+    filter_transactions_by_month
 )
 
 def add_multiple_expenses():
@@ -35,7 +42,8 @@ def main_menu():
         print("1️⃣ Neue Transaktion hinzufügen")
         print("2️⃣ Alle Transaktionen anzeigen")
         print("3️⃣ Einnahmen & Ausgaben zusammenfassen")
-        print("4️⃣ Diagramm der Ausgaben nach Kategorie")
+        # NEU: Wir ändern den Text hier
+        print("4️⃣ Diagramm: Einnahmen & Ausgaben pro Kategorie")
         print("5️⃣ Transaktionen als CSV exportieren")
         print("6️⃣ Transaktionen als PDF exportieren")
         print("7️⃣ Transaktionen nach Monat filtern")
@@ -45,12 +53,12 @@ def main_menu():
 
         if choice == "1":
             typ = input("📌 Typ (Einnahme/Ausgabe): ").strip().capitalize()
-            if typ == "Einnahme":
+            if typ == "Einnahmen":
                 betrag = float(input("💰 Betrag in CHF: "))
                 kategorie = input("📂 Kategorie: ").strip()
                 add_transaction("Einnahme", betrag, kategorie)
                 print(f"✅ Transaktion gespeichert: {kategorie} - {betrag:.2f} CHF")
-            elif typ == "Ausgabe":
+            elif typ == "Ausgaben":
                 add_multiple_expenses()  # Mehrere Ausgaben in einer Zeile eingeben
             else:
                 print("❌ Ungültiger Typ! Bitte 'Einnahme' oder 'Ausgabe' eingeben.")
@@ -65,7 +73,8 @@ def main_menu():
             print(f"💼 Aktueller Saldo: {get_balance():.2f} CHF")
         
         elif choice == "4":
-            plot_expenses_by_category()
+            # NEU: Jetzt das neue Diagramm aufrufen
+            plot_incomes_and_expenses_by_category()
         
         elif choice == "5":
             print("📤 Exportiere Transaktionen als CSV...")
