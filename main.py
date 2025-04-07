@@ -4,7 +4,6 @@ from database import (
     get_total_income, 
     get_total_expenses, 
     get_balance, 
-    # NEU: importiere die neue Funktion
     plot_incomes_and_expenses_by_category,
     export_to_csv, 
     export_to_pdf, 
@@ -18,18 +17,16 @@ def add_multiple_expenses():
 
     eingabe = input("💰 Deine Ausgaben: ").strip()
     if not eingabe:
-        return  # Falls der Nutzer nichts eingibt, abbrechen
+        return
 
-    # Mehrere Ausgaben verarbeiten
-    ausgaben = eingabe.split(",")  # Trennen nach ","
+    ausgaben = eingabe.split(",")
     
     for ausgabe in ausgaben:
         try:
-            kategorie, betrag = ausgabe.split(":")  # Trennen nach ":"
-            kategorie = kategorie.strip()  # Leerzeichen entfernen
-            betrag = float(betrag.strip())  # Betrag in Float umwandeln
+            kategorie, betrag = ausgabe.split(":")
+            kategorie = kategorie.strip()
+            betrag = float(betrag.strip())
 
-            # Transaktion speichern
             add_transaction("Ausgabe", betrag, kategorie)
             print(f"✅ Transaktion gespeichert: {kategorie} - {betrag:.2f} CHF")
 
@@ -42,7 +39,6 @@ def main_menu():
         print("1️⃣ Neue Transaktion hinzufügen")
         print("2️⃣ Alle Transaktionen anzeigen")
         print("3️⃣ Einnahmen & Ausgaben zusammenfassen")
-        # NEU: Wir ändern den Text hier
         print("4️⃣ Diagramm: Einnahmen & Ausgaben pro Kategorie")
         print("5️⃣ Transaktionen als CSV exportieren")
         print("6️⃣ Transaktionen als PDF exportieren")
@@ -53,13 +49,13 @@ def main_menu():
 
         if choice == "1":
             typ = input("📌 Typ (Einnahme/Ausgabe): ").strip().capitalize()
-            if typ == "Einnahmen":
+            if typ == "Einnahme":
                 betrag = float(input("💰 Betrag in CHF: "))
                 kategorie = input("📂 Kategorie: ").strip()
                 add_transaction("Einnahme", betrag, kategorie)
                 print(f"✅ Transaktion gespeichert: {kategorie} - {betrag:.2f} CHF")
-            elif typ == "Ausgaben":
-                add_multiple_expenses()  # Mehrere Ausgaben in einer Zeile eingeben
+            elif typ == "Ausgabe":
+                add_multiple_expenses()
             else:
                 print("❌ Ungültiger Typ! Bitte 'Einnahme' oder 'Ausgabe' eingeben.")
         
@@ -73,7 +69,6 @@ def main_menu():
             print(f"💼 Aktueller Saldo: {get_balance():.2f} CHF")
         
         elif choice == "4":
-            # NEU: Jetzt das neue Diagramm aufrufen
             plot_incomes_and_expenses_by_category()
         
         elif choice == "5":
