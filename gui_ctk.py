@@ -166,7 +166,7 @@ style.map(
 
 # Header
 try:
-    img = Image.open("logo.png").resize((80, 80))
+    img = Image.open("logo.png").resize((150, 150))
     logo = ImageTk.PhotoImage(img)
     ctk.CTkLabel(app, image=logo, text="").pack(pady=5)
 except:
